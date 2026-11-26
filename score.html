@@ -1,1201 +1,740 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Battambang:wght@400;700&family=Moul&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;500;700&family=Moul&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<title>ពិន្ទុថ្នាក់ទី8G</title>
+<title>លទ្ធផលសិក្សា</title>
 <style>
-    :root {
-        --primary: #6366f1;
-        --primary-2: #8b5cf6;
-        --primary-dark: #4f46e5;
-        --primary-soft: rgba(99,102,241,0.10);
-        --primary-soft-strong: rgba(99,102,241,0.18);
-        --success: #10b981;
-        --danger: #ef4444;
-        --ink: #1e2233;
-        --ink-soft: #6b7280;
-        --card: rgba(255,255,255,0.86);
-        --card-solid: #ffffff;
-        --line: rgba(15,23,42,0.08);
-        --radius-lg: 18px;
-        --radius-md: 12px;
-        --radius-sm: 8px;
-        --shadow-sm: 0 2px 10px rgba(30,34,64,0.06);
-        --shadow-md: 0 10px 30px rgba(30,34,64,0.10);
-        --shadow-lg: 0 20px 50px rgba(30,34,64,0.16);
-        --ease: cubic-bezier(.4,0,.2,1);
-        --ease-bounce: cubic-bezier(.34,1.56,.64,1);
-    }
+  :root{
+    --ink:#132436;
+    --muted:#7c8ba0;
+    --bg:#e7edf5;
+    --surface:#ffffff;
+    --surface-soft:#f3f6fb;
+    --primary:#1b6e82;
+    --primary-dark:#134f5e;
+    --gold:#c79a3b;
+    --present:#2e9e5c;
+    --present-soft:#e4f5eb;
+    --absent:#d9534f;
+    --absent-soft:#fbe7e6;
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:10px;
+    --shadow: 0 10px 30px rgba(19,36,54,0.10);
+  }
 
-    * { box-sizing: border-box; }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family:"Battambang", system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 500px at 50% -10%, #dfeaf6 0%, var(--bg) 55%);
+    color:var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
 
-    body {
-        font-family: "Battambang", "Inter", system-ui, sans-serif;
-        background:
-            radial-gradient(circle at 8% 8%, rgba(99,102,241,0.14), transparent 40%),
-            radial-gradient(circle at 92% 18%, rgba(236,72,153,0.10), transparent 42%),
-            radial-gradient(circle at 50% 100%, rgba(16,185,129,0.08), transparent 45%),
-            #f4f5fb;
-        min-height: 100vh;
-        margin: 0;
-        color: var(--ink);
-        -webkit-font-smoothing: antialiased;
-        animation: bodyIn 0.5s var(--ease);
-    }
-    @keyframes bodyIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
 
-    header {
-        position: sticky;
-        top: 0;
-        background: rgba(255,255,255,0.78);
-        backdrop-filter: blur(16px) saturate(160%);
-        -webkit-backdrop-filter: blur(16px) saturate(160%);
-        padding: 14px 18px;
-        display: flex;
-        gap: 12px;
-        box-shadow: var(--shadow-sm);
-        border-bottom: 1px solid var(--line);
-        z-index: 10;
-        font-family: "Battambang", "Inter", system-ui;
-        transition: box-shadow .25s var(--ease);
-        animation: slideDown .4s var(--ease);
-    }
-    @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-14px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .header-row {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-    .header-main-row {
-        justify-content: space-between;
-    }
-    .header-controls-row {
-        justify-content: flex-start;
-    }
-    .header-actions-row {
-        justify-content: space-between;
-        border-top: 1px solid var(--line);
-        padding-top: 10px;
-    }
-    .quick-score-group {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-    }
-    #quickScore {
-        width: 90px;
-    }
-    .action-buttons-group {
-        display: flex;
-        gap: 8px;
-    }
-    .container {
-        display: flex;
-        gap: 20px;
-        padding: 18px;
-        font-family: "Battambang", "Inter", system-ui;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
+  .app{
+    max-width:640px;
+    margin:0 auto;
+    height:100dvh;
+    display:flex;
+    flex-direction:column;
+    background:var(--surface);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    position:relative;
+  }
 
-    .panel {
-        background: var(--card);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--line);
-        border-radius: var(--radius-lg);
-        padding: 0;
-        flex: 1;
-        box-shadow: var(--shadow-md);
-        display: flex;
-        flex-direction: column;
-        max-height: calc(100vh - 170px);
-        overflow: hidden;
-        animation: panelRise .45s var(--ease);
-    }
-    @keyframes panelRise {
-        from { opacity: 0; transform: translateY(16px) scale(.98); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .panel.fade-swap {
-        animation: panelSwap .38s var(--ease);
-    }
-    @keyframes panelSwap {
-        0% { opacity: 0; transform: translateY(10px) scale(.985); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
+  /* ---------- Header ---------- */
+  .header{
+    position:relative;
+    padding:18px 18px 14px;
+    background: linear-gradient(155deg, var(--primary-dark), var(--primary) 65%);
+    color:#eaf4f7;
+    overflow:visible;
+    z-index:20;
+    flex-shrink:0;
+  }
 
-    .student-header {
-        position: sticky;
-        top: 0;
-        background: rgba(255,255,255,0.92);
-        backdrop-filter: blur(6px);
-        padding: 14px;
-        z-index: 5;
-        border-bottom: 1px solid var(--line);
-        font-family: "Battambang", "Inter", system-ui;
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
-    .student-header input {
-        flex: 1;
-        min-width: 150px;
-    }
-    .student-list {
-        overflow-y: auto;
-        flex: 1;
-        padding: 12px;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(99,102,241,0.35) transparent;
-    }
-    .student-list::-webkit-scrollbar { width: 8px; }
-    .student-list::-webkit-scrollbar-track { background: transparent; }
-    .student-list::-webkit-scrollbar-thumb {
-        background: rgba(99,102,241,0.30);
-        border-radius: 10px;
-    }
-    .student-list::-webkit-scrollbar-thumb:hover {
-        background: rgba(99,102,241,0.5);
-    }
+  .header::after{
+    content:"";
+    position:absolute;
+    right:-30px;
+    bottom:-30px;
+    width:220px;
+    height:120px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 120'><g fill='%23c79a3b' opacity='0.35'><rect x='20' y='70' width='180' height='8'/><polygon points='40,70 50,40 60,70'/><polygon points='95,70 110,20 125,70'/><polygon points='160,70 170,40 180,70'/></g></svg>") no-repeat center / contain;
+    pointer-events:none;
+  }
 
-    .student-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 9px 12px;
-        border: 1px solid var(--line);
-        background: var(--card-solid);
-        border-radius: var(--radius-md);
-        margin-bottom: 8px;
-        font-family: "Battambang", "Inter", system-ui;
-        gap: 10px;
-        box-shadow: 0 1px 3px rgba(30,34,64,0.04);
-        transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
-        animation: itemIn .38s var(--ease) both;
-        opacity: 0;
-    }
-    @keyframes itemIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .student-item:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-sm);
-        border-color: rgba(99,102,241,0.35);
-    }
-    .student-item span {
-        flex: 1;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-weight: 500;
-    }
-    .student-icon {
-        flex: 0 0 auto;
-        width: 26px;
-        height: 26px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary), var(--primary-2));
-        color: #fff;
-        font-size: 0.72rem;
-        box-shadow: 0 3px 8px rgba(99,102,241,0.35);
-        transition: transform .2s var(--ease-bounce);
-    }
-    .student-item:hover .student-icon {
-        transform: scale(1.1) rotate(-6deg);
-    }
+  .title-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:8px;
+    margin:0 0 14px;
+    position:relative;
+  }
 
-    .btn-blue, .btn-gray {
-        border: none;
-        border-radius: var(--radius-sm);
-        cursor: pointer;
-        font-size: 0.95rem;
-        font-family: "Battambang", "Inter", system-ui;
-        white-space: nowrap;
-        padding: 9px 16px;
-        position: relative;
-        overflow: hidden;
-        transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .2s var(--ease), color .2s var(--ease), filter .2s var(--ease);
-        isolation: isolate;
-    }
-    .btn-blue {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        box-shadow: 0 4px 14px rgba(79,70,229,0.30);
-    }
-    .btn-blue:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 22px rgba(79,70,229,0.40);
-        filter: brightness(1.05);
-    }
-    .btn-blue:active:not(:disabled) {
-        transform: translateY(0) scale(.97);
-    }
-    .btn-gray {
-        background: var(--primary-soft);
-        color: var(--primary-dark);
-    }
-    .btn-gray:hover:not(:disabled) {
-        transform: translateY(-2px);
-        background: var(--primary-soft-strong);
-        box-shadow: var(--shadow-sm);
-    }
-    .btn-gray:active:not(:disabled) {
-        transform: translateY(0) scale(.97);
-    }
-    button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none !important;
-        filter: none !important;
-    }
-    button:disabled:hover {
-        transform: none;
-    }
-    button a {
-        color: inherit;
-        text-decoration: none;
-    }
+  .title-row h1{
+    font-family:"Moul", "Battambang", serif;
+    font-weight:400;
+    font-size:1.15rem;
+    letter-spacing:0.3px;
+    margin:0;
+    text-align:center;
+  }
 
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.55);
-        transform: scale(0);
-        animation: rippleAnim .55s ease-out;
-        pointer-events: none;
-        z-index: 0;
-    }
-    .btn-gray .ripple {
-        background: rgba(99,102,241,0.25);
-    }
-    @keyframes rippleAnim {
-        to { transform: scale(2.6); opacity: 0; }
-    }
+  .title-row .badge{
+    font-size:0.95rem;
+  }
 
-    .score-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 12px;
-    }
-    .score-box {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        padding: 10px;
-        transition: border-color .2s var(--ease), box-shadow .2s var(--ease), transform .2s var(--ease);
-        animation: itemIn .35s var(--ease) both;
-        opacity: 0;
-    }
-    .score-box:hover {
-        border-color: rgba(99,102,241,0.35);
-        box-shadow: var(--shadow-sm);
-    }
-    .score-box label {
-        font-size: 0.85rem;
-        color: var(--ink);
-        font-weight: 500;
-    }
-    input[type="number"], input[type="text"], input[type="text"][inputmode], select {
-        padding: 9px 10px;
-        border: 1.5px solid var(--line);
-        border-radius: var(--radius-sm);
-        width: 100%;
-        box-sizing: border-box;
-        font-family: "Battambang", "Inter", system-ui;
-        font-size: 1rem;
-        background: #fff;
-        color: var(--ink);
-        transition: border-color .2s var(--ease), box-shadow .2s var(--ease), transform .15s var(--ease);
-    }
-    input[type="number"]:focus, input[type="text"]:focus, select:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px var(--primary-soft);
-    }
-    input:disabled, select:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        background: #f0f0f0;
-    }
+  .row-inline{
+    display:flex;
+    gap:8px;
+    align-items:stretch;
+  }
 
-    /* --- Custom 3-Column Dropdown Styles --- */
-    .dropdown-container {
-        position: relative;
-    }
-    .grid-dropdown-content {
-        display: grid;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: #fff;
-        width: 320px;
-        box-shadow: var(--shadow-lg);
-        z-index: 100;
-        border-radius: var(--radius-md);
-        padding: 10px;
-        border: 1px solid var(--line);
-        margin-top: 8px;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        box-sizing: border-box;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-8px) scale(0.97);
-        transform-origin: top left;
-        pointer-events: none;
-        transition: opacity .18s var(--ease), transform .18s var(--ease), visibility .18s;
-    }
-    .grid-dropdown-content.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-    }
-    .grid-choice {
-        padding: 9px 4px;
-        text-align: center;
-        background: #f4f5fb;
-        border-radius: var(--radius-sm);
-        cursor: pointer;
-        font-size: 0.88rem;
-        user-select: none;
-        color: #333;
-        transition: background .18s var(--ease), color .18s var(--ease), transform .15s var(--ease);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .grid-choice:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-1px);
-    }
-    .grid-choice.active {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        font-weight: bold;
-        box-shadow: 0 3px 10px rgba(79,70,229,0.35);
-    }
+  .score-link{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:0 14px;
+    border-radius:var(--radius-sm);
+    background:rgba(159, 214, 250, 0.14);
+    border:1px solid rgba(255,255,255,0.35);
+    color:#fff;
+    text-decoration:none;
+    font-size:0.85rem;
+    white-space:nowrap;
+    transition:background .18s ease, transform .12s ease;
+  }
+  .score-link:active{ transform:scale(0.96); }
+  .score-link:hover{ background:rgba(255,255,255,0.24); }
 
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-    #saveStatus, #saveStatush {
-        display: none;
-    }
+  .footer .score-link{
+    height:52px;
+    border-radius:99px;
+    padding:0 18px;
+    background:rgba(159, 214, 250, 0.39);
+    border:1.5px solid #dfe6ee;
+    color:var(--ink);
+  }
+  .footer .score-link:hover{ background:#bad0edcc; }
 
-    /* --- Popup toast --- */
-    #toastLayer {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        pointer-events: none;
-    }
-    .toast-popup {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: rgba(255,255,255,0.92);
-        backdrop-filter: blur(10px);
-        border-radius: 14px;
-        padding: 13px 22px;
-        box-shadow: var(--shadow-lg);
-        font-family: "Battambang", "Inter", system-ui;
-        font-size: 1rem;
-        font-weight: bold;
-        color: #333;
-        border-left: 5px solid var(--primary);
-        opacity: 0;
-        transform: translateY(-30px) scale(0.9);
-        animation: toastIn 0.4s var(--ease-bounce) forwards;
-        max-width: 90vw;
-        white-space: nowrap;
-    }
-    .toast-popup.toast-out {
-        animation: toastOut 0.3s ease forwards;
-    }
-    .toast-popup.toast-saving { border-left-color: var(--primary); }
-    .toast-popup.toast-success { border-left-color: var(--success); }
-    .toast-popup.toast-error { border-left-color: var(--danger); }
+  /* ---------- Export Dropdowns ---------- */
+  .dropdown{
+    position:relative;
+    flex:1;
+    display:flex;
+  }
 
-    @keyframes toastIn {
-        0% { opacity: 0; transform: translateY(-30px) scale(0.9); }
-        60% { opacity: 1; transform: translateY(4px) scale(1.03); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes toastOut {
-        0% { opacity: 1; transform: translateY(0) scale(1); }
-        100% { opacity: 0; transform: translateY(-20px) scale(0.9); }
-    }
+  .export-btn{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:11px;
+    border-radius:var(--radius-sm);
+    background:rgba(255,255,255,0.14);
+    border:1px solid rgba(255,255,255,0.35);
+    color:#fff;
+    font-family:inherit;
+    font-size:0.82rem;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .18s ease, transform .12s ease;
+  }
+  .export-btn:hover{ background:rgba(255,255,255,0.24); }
+  .export-btn:active{ transform:scale(0.96); }
 
-    .status-spinner {
-        width: 16px;
-        height: 16px;
-        border: 2.5px solid rgba(99,102,241,0.25);
-        border-top-color: var(--primary);
-        border-radius: 50%;
-        animation: spin 0.6s linear infinite;
-        flex-shrink: 0;
-    }
-    .status-check {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: var(--success);
-        flex-shrink: 0;
-        position: relative;
-        animation: pop 0.3s var(--ease-bounce);
-    }
-    .status-check::after {
-        content: '';
-        position: absolute;
-        left: 5px;
-        top: 1px;
-        width: 5px;
-        height: 9px;
-        border: solid white;
-        border-width: 0 2.5px 2.5px 0;
-        transform: rotate(45deg);
-    }
-    .status-error-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: var(--danger);
-        color: white;
-        font-size: 12px;
-        font-weight: bold;
-        flex-shrink: 0;
-        animation: pop 0.3s var(--ease-bounce);
-    }
-    @keyframes pop {
-        0% { transform: scale(0.3); opacity: 0; }
-        70% { transform: scale(1.15); opacity: 1; }
-        100% { transform: scale(1); }
-    }
+  .export-btn.pdf i.icon-type{ color:#ff9b95; }
+  .export-btn.excel i.icon-type{ color:#7fe0a8; }
 
-    .score-loading {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        padding: 40px 0;
-        grid-column: 1 / -1;
-        color: var(--ink-soft);
-        font-family: "Battambang", "Inter", system-ui;
-        animation: itemIn .3s var(--ease);
-    }
-    .score-loading .status-spinner {
-        width: 28px;
-        height: 28px;
-        border-width: 3px;
-    }
+  .dropdown-menu{
+    position:absolute;
+    top:calc(100% + 6px);
+    right:0;
+    min-width:155px;
+    max-height:260px;
+    overflow-y:auto;
+    background:var(--surface);
+    border-radius:var(--radius-sm);
+    box-shadow:0 12px 28px rgba(19,36,54,0.22);
+    border:1px solid #dfe6ee;
+    padding:4px;
+    display:none;
+    z-index:100;
+  }
+  .dropdown-menu.open{
+    display:block;
+    animation:menuIn .16s ease forwards;
+  }
+  @keyframes menuIn{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
 
-    /* Panel top / footer accents */
-    .panel-top {
-        background: linear-gradient(180deg, rgba(99,102,241,0.06), rgba(99,102,241,0));
-    }
+  .dropdown-item{
+    width:100%;
+    text-align:left;
+    padding:8px 12px;
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    font-family:inherit;
+    font-size:0.86rem;
+    border-radius:7px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition:background .14s ease, color .14s ease;
+  }
+  .dropdown-item:hover{
+    background:var(--surface-soft);
+    color:var(--primary);
+  }
+  .dropdown-item span.en-month{
+    font-size:0.75rem;
+    color:var(--muted);
+  }
 
-    /* --- Mobile Responsive Media Queries --- */
-    @media (max-width: 768px) {
-        header {
-            position: relative;
-            padding: 10px;
-            gap: 10px;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            background: rgba(255,255,255,0.96);
-        }
-        .header-row {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 8px;
-            width: 100%;
-        }
-        .header-main-row {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .quick-score-group, .action-buttons-group {
-            width: 100%;
-        }
-        .header-controls-row {
-            flex-direction: row !important;
-        }
-        .header-controls-row .dropdown-container {
-            flex: 1;
-            width: auto;
-        }
-        .dropdown-container button, .action-buttons-group button {
-            width: 100%;
-            text-align: center;
-        }
-        .quick-score-group #quickScore {
-            width: 40% !important;
-            flex-grow: 1;
-        }
-        .quick-score-group #applyQuick {
-            width: 60%;
-        }
-        .action-buttons-group button {
-            flex: 1;
-        }
-        .container {
-            flex-direction: column;
-            padding: 10px;
-            gap: 15px;
-        }
-        .panel {
-            max-height: none;
-        }
-        .student-list {
-            max-height: 480px;
-        }
+  /* ---------- Footer ---------- */
+  .footer{
+    margin-top:auto;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:var(--surface);
+    border-top:1px solid #e7edf5;
+  }
 
-        /* Displays 3-column layouts inside centered mobile overlays */
-        .grid-dropdown-content {
-            position: fixed;
-            top: 20% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) scale(0.97) !important;
-            width: 90vw;
-            max-width: 340px;
-            max-height: 80vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid #bbb;
-        }
-        .grid-dropdown-content.show {
-            transform: translate(-50%, -50%) scale(1) !important;
-        }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
 
-        .mobile-hide {
-            display: none !important;
-        }
-    }
+  /* ---------- Toast ---------- */
+  .toast-layer{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding: 0 16px calc(90px + env(safe-area-inset-bottom));
+    pointer-events:none;
+    z-index:50;
+  }
 
-    @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-            animation-duration: 0.001ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.001ms !important;
-        }
-    }
+  .toast{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    max-width:100%;
+    padding:13px 16px;
+    border-radius:var(--radius-md);
+    background:var(--ink);
+    color:#fff;
+    font-size:0.88rem;
+    box-shadow:0 12px 28px rgba(19,36,54,0.28);
+    opacity:0;
+    transform:translateY(14px) scale(0.96);
+    transition: opacity .22s ease, transform .22s ease;
+    pointer-events:auto;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+  .toast i{
+    flex-shrink:0;
+    font-size:1rem;
+  }
+  .toast.warn i{ color:var(--gold); }
+  .toast.error i{ color:#ff8a83; }
+  .toast.success i{ color:#7fe0a8; }
+
+
+  /* ---------- Download popup ---------- */
+  .dl-overlay{
+    position:absolute; inset:0; z-index:60;
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    background:rgba(19,36,54,0.48);
+    -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+    opacity:0; pointer-events:none;
+    transition:opacity .28s ease;
+  }
+  .dl-overlay.show{ opacity:1; pointer-events:auto; }
+
+  .dl-card{
+    --accent:var(--primary);
+    width:100%; max-width:320px;
+    padding:30px 22px 20px;
+    text-align:center;
+    background:var(--surface);
+    border-radius:26px;
+    box-shadow:0 28px 70px rgba(19,36,54,0.38);
+    transform:translateY(28px) scale(.9);
+    opacity:0;
+    transition:transform .45s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+  }
+  .dl-overlay.show .dl-card{ transform:none; opacity:1; }
+  .dl-card.t-pdf{ --file:#d9534f; }
+  .dl-card.t-excel{ --file:#2e9e5c; }
+  .dl-card.is-success{ --accent:var(--present); }
+  .dl-card.is-error{ --accent:var(--absent); }
+
+  /* icon stage */
+  .dl-icon{ position:relative; width:104px; height:104px; margin:0 auto 20px; }
+  .dl-glow{
+    position:absolute; inset:-6px; border-radius:50%;
+    background:radial-gradient(circle, color-mix(in srgb, var(--accent) 30%, transparent) 0%, transparent 70%);
+    animation:dlPulse 1.8s ease-in-out infinite;
+  }
+  .dl-card:not(.is-loading) .dl-glow{ animation:none; opacity:.8; }
+  @keyframes dlPulse{ 0%,100%{ transform:scale(.9); opacity:.6; } 50%{ transform:scale(1.12); opacity:1; } }
+
+  .dl-ring{ position:absolute; inset:4px; width:96px; height:96px; transition:opacity .25s ease; }
+  .dl-ring circle{ fill:none; stroke-width:5; }
+  .dl-ring .track{ stroke:#e7edf5; }
+  .dl-ring .arc{
+    stroke:url(#dlGrad); stroke-linecap:round;
+    stroke-dasharray:70 207;
+    transform-origin:50% 50%;
+    animation:dlSpin 1.1s cubic-bezier(.5,.15,.5,.85) infinite;
+  }
+  @keyframes dlSpin{ to{ transform:rotate(360deg); } }
+  .dl-card:not(.is-loading) .dl-ring{ opacity:0; }
+
+  .dl-file{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.3rem; color:var(--file);
+    animation:dlFloat 1.6s ease-in-out infinite;
+    transition:opacity .2s ease, transform .3s ease;
+  }
+  @keyframes dlFloat{ 0%,100%{ transform:translateY(2px); } 50%{ transform:translateY(-5px); } }
+  .dl-card:not(.is-loading) .dl-file{ opacity:0; transform:scale(.4); animation:none; }
+
+  .dl-badge{
+    position:absolute; inset:4px; width:96px; height:96px;
+    opacity:0; transform:scale(.3);
+  }
+  .dl-badge circle{ fill:var(--accent); }
+  .dl-badge path{
+    fill:none; stroke:#fff; stroke-width:6;
+    stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:80; stroke-dashoffset:80;
+  }
+  .dl-card.is-success .dl-badge.ok,
+  .dl-card.is-error .dl-badge.err{
+    opacity:1; transform:scale(1);
+    transition:transform .5s cubic-bezier(.34,1.56,.64,1), opacity .2s ease;
+  }
+  .dl-card.is-success .dl-badge.ok path,
+  .dl-card.is-error .dl-badge.err path{
+    animation:dlDraw .45s .25s ease forwards;
+  }
+  @keyframes dlDraw{ to{ stroke-dashoffset:0; } }
+  .dl-card.is-error .dl-icon{ animation:dlShake .5s .2s ease; }
+  @keyframes dlShake{
+    0%,100%{ transform:translateX(0); } 20%{ transform:translateX(-7px); } 40%{ transform:translateX(7px); }
+    60%{ transform:translateX(-4px); } 80%{ transform:translateX(4px); }
+  }
+
+  /* text */
+  .dl-title{
+    margin:0 0 6px;
+    font-family:"Moul","Battambang",serif; font-weight:400;
+    font-size:0.98rem; line-height:1.6; color:var(--ink);
+  }
+  .dl-sub{ margin:0; font-size:0.86rem; line-height:1.6; color:var(--muted); min-height:1.4em; }
+  .dl-dots span{ display:inline-block; animation:dlDot 1.2s infinite both; }
+  .dl-dots span:nth-child(2){ animation-delay:.2s; }
+  .dl-dots span:nth-child(3){ animation-delay:.4s; }
+  @keyframes dlDot{ 0%,80%,100%{ opacity:.2; } 40%{ opacity:1; } }
+  .dl-card:not(.is-loading) .dl-dots{ display:none; }
+
+  /* progress */
+  .dl-progress{
+    display:flex; align-items:center; gap:10px;
+    margin-top:18px;
+    max-height:24px; overflow:hidden;
+    transition:max-height .3s ease, opacity .25s ease, margin .3s ease;
+  }
+  .dl-card:not(.is-loading) .dl-progress{ max-height:0; opacity:0; margin-top:0; }
+  .dl-bar{ flex:1; height:8px; border-radius:99px; background:#e7edf5; overflow:hidden; }
+  .dl-fill{
+    height:100%; width:0%; border-radius:99px;
+    background:linear-gradient(90deg, var(--primary), #3fb4cf, var(--gold));
+    background-size:200% 100%;
+    animation:dlShimmer 1.4s linear infinite;
+    transition:width .3s ease;
+  }
+  @keyframes dlShimmer{ to{ background-position:-200% 0; } }
+  .dl-pct{ min-width:38px; text-align:right; font-size:0.78rem; font-weight:700; color:var(--primary-dark); font-variant-numeric:tabular-nums; }
+
+  /* buttons */
+  .dl-actions{ display:flex; gap:8px; margin-top:20px; }
+  .dl-btn{
+    flex:1; height:44px;
+    border-radius:99px; border:1.5px solid #dfe6ee;
+    background:var(--surface-soft); color:var(--ink);
+    font-family:inherit; font-size:0.88rem; cursor:pointer;
+    transition:transform .12s ease, background .18s ease;
+  }
+  .dl-btn:hover{ background:#e8eef6; }
+  .dl-btn:active{ transform:scale(.96); }
+  .dl-btn.primary{
+    border-color:transparent; color:#fff;
+    background:linear-gradient(155deg, var(--primary), var(--primary-dark));
+    box-shadow:0 6px 14px rgba(19,78,94,0.3);
+  }
+  .dl-btn[hidden]{ display:none; }
 </style>
 </head>
 <body>
+  <div class="app">
 
-<div id="toastLayer"></div>
+    <div class="header">
+      <div class="title-row">
+        <h1>លទ្ធផលសិក្សាថ្នាក់ទី៧ "I"</h1>
+        <span class="badge">👨‍💻</span>
+      </div>
 
-<header>
-   <!--- <div class="header-row header-main-row">
-       <h3 style="margin:0;">ពិន្ទុថ្នាក់ទី៧D</h3> -->
+      <div class="row-inline">
+        <div class="dropdown">
+          <button type="button" class="export-btn excel" onclick="handleExport('excel')" aria-label="ទាញយក Excel ទាំងអស់">
+            <i class="fa-solid fa-file-excel icon-type"></i>ទាញយក Excel
+          </button>
+        </div>
+        <div class="dropdown">
+          <button type="button" class="export-btn pdf" onclick="toggleDropdown('pdfMenu', event)" aria-label="នាំចេញ PDF">
+            <i class="fa-solid fa-file-pdf icon-type"></i>ទាញយក PDF <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="dropdown-menu" id="pdfMenu"></div>
+        </div>
+      </div>
 
     </div>
-    <span id="saveStatush" style="color:green;font-weight:bold;"></span>
-    <select id="monthSelect" style="display: none;">
-        <option value="" disabled selected hidden>ជ្រើសរើសខែ</option>
-        <option value="វិច្ឆិកា">វិច្ឆិកា</option>
-        <option value="ធ្នូ">ធ្នូ</option>
-        <option value="មករា">មករា</option>
-        <option value="កុម្ភៈ">កុម្ភៈ</option>
-        <option value="ឆមាសទី១">ឆមាសទី១</option>
-        <option value="មីនា">មីនា</option>
-        <option value="ឧសភា">ឧសភា</option>
-        <option value="មិថុនា">មិថុនា</option>
-        <option value="កក្កដា">កក្កដា</option>
-        <option value="ឆមាសទី២">ឆមាសទី២</option>
-    </select>
-    <select id="subjectQuick" style="display: none;"></select>
 
-    <div class="header-row header-controls-row">
-        <div class="dropdown-container">
-            <button type="button" class="btn-gray" id="monthGridBtn" data-prefix="ខែ">
-                ខែ <i class="fa fa-caret-down" style="margin-left:5px;"></i>
-            </button>
-            <div class="grid-dropdown-content" id="monthGridDropdown"></div>
-        </div>
-
-        <div class="dropdown-container">
-            <button type="button" class="btn-gray" id="subjectGridBtn" data-prefix="មុខវិជ្ជា">
-                មុខវិជ្ជា <i class="fa fa-caret-down" style="margin-left:5px;"></i>
-            </button>
-            <div class="grid-dropdown-content" id="subjectGridDropdown"></div>
-        </div>
-
-       <div class="quick-score-group" style="display: none;">
-            <input type="number" id="quickScore" placeholder="ពិន្ទុ">
-            <button class="btn-blue" id="applyQuick">បញ្ចូលរហ័ស</button>
-        </div>
-
-    <div class="header-row header-actions-row">
-       <h4 id="selectedStudenth" style="padding: 0px; margin: 0; font-size: 1rem; color: #007bff; display: none;"></h4>
-        <div class="action-buttons-group">
-            <button class="btn-blue" id="saveListScores">រក្សាទុក</button>
-            <button class="btn-gray"><a href="index.html">ស្រង់អវត្តមាន</a></button>
-              <button class="btn-gray"><a href="result.html">លទ្ធផល</a></button>
-        </div>
-    </div>
-</header>
-
-<div class="container">
-    <div class="panel" id="studentPanel" style="flex:1;">
-        <div class="student-header">
-            <input type="text" id="searchName" placeholder="ស្វែងរកឈ្មោះសិស្ស...">
-            <button class="btn-blue" id="reloadBtn">ពិន្ទុ 8G</button>
-        </div>
-        <div id="studentList" class="student-list"></div>
+    <div class="footer">
+      <a class="score-link" href="https://edu-kh.github.io/score/">
+        <i class="fa-solid fa-chart-simple"></i> សម្រង់ពិន្ទុ
+      </a>
+       <a class="score-link" href="https://edu-kh.github.io/student-attendant/">
+       <i class="fa-solid fa-calendar"></i> សម្រង់អវត្តមាន
+      </a>
     </div>
 
-    <div class="panel" id="scorePanel" style="display: none;">
-        <div class="panel-top" style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-bottom:1px solid var(--line);">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <button class="btn-gray" id="backBtn" style="padding: 5px 10px;"><i class="fa fa-arrow-left"></i></button>
-                <h4 id="selectedStudent" style="margin:0;">គ្មានឈ្មោះសិស្ស</h4>
-            </div>
-            <div style="display:flex; gap:5px;">
-                <button class="btn-gray" id="prevStudent"><i class="fa fa-chevron-left"></i></button>
-                <div>
-                    <button class="btn-blue" id="saveBtn">រក្សាទុក</button>
-                </div>
-                <button class="btn-gray" id="nextStudent"><i class="fa fa-chevron-right"></i></button>
-            </div>
+    <div class="dl-overlay" id="dlOverlay" role="dialog" aria-modal="true" aria-live="polite">
+      <div class="dl-card is-loading t-pdf" id="dlCard">
+        <div class="dl-icon">
+          <span class="dl-glow"></span>
+          <svg class="dl-ring" viewBox="0 0 96 96" aria-hidden="true">
+            <defs>
+              <linearGradient id="dlGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1b6e82"/>
+                <stop offset="1" stop-color="#c79a3b"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="48" cy="48" r="44"/>
+            <circle class="arc" cx="48" cy="48" r="44"/>
+          </svg>
+          <i class="dl-file fa-solid fa-file-pdf" id="dlFileIcon"></i>
+          <svg class="dl-badge ok" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="44"/><path d="M30 50 L43 63 L67 36"/></svg>
+          <svg class="dl-badge err" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="44"/><path d="M35 35 L61 61 M61 35 L35 61"/></svg>
         </div>
-
-        <div style="padding: 16px; flex: 1; overflow-y: auto;">
-            <div id="scoresGrid" class="score-grid"></div>
+        <h3 class="dl-title" id="dlTitle"></h3>
+        <p class="dl-sub"><span id="dlSub"></span><span class="dl-dots"><span>.</span><span>.</span><span>.</span></span></p>
+        <div class="dl-progress">
+          <div class="dl-bar"><div class="dl-fill" id="dlFill"></div></div>
+          <span class="dl-pct" id="dlPct">0%</span>
         </div>
-        <div style="padding: 15px; border-top: 1px solid var(--line);">
-            <button class="btn-gray" id="resetBtn">សម្អាត</button>
-            <span id="saveStatus" style="margin-left:10px;color:green;font-weight:bold;"></span>
+        <div class="dl-actions">
+          <button type="button" class="dl-btn" id="dlCancel">បោះបង់</button>
+          <button type="button" class="dl-btn primary" id="dlRetry" hidden>ព្យាយាមម្តងទៀត</button>
+          <button type="button" class="dl-btn" id="dlClose" hidden>បិទ</button>
         </div>
+      </div>
     </div>
-</div>
+
+    <div class="toast-layer" id="toastLayer"></div>
+
+  </div>
 
 <script>
-const SHEET_API_BASE = 'https://script.google.com/macros/s/AKfycbxTteDTUv5Dn_4FpBNtXFIrEtpZZmkQE6BNDrNW7uhvHgWTjgbtxkL8b52vGnDaGIi_1w/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwIq4CuUqyzXxn958RNQ0NQtZpqSeg0fi4Nm1-23s0goewkY__kyk-qS0dfUZNwJSZWJA/exec';
+  const SCHOOL_MONTHS = [
+    { en: 'November', km: 'វិច្ឆិកា' },
+    { en: 'December', km: 'ធ្នូ' },
+    { en: 'January', km: 'មករា' },
+    { en: 'February', km: 'កុម្ភៈ' },
+    { en: 'March', km: 'មីនា' },
+    { en: '', km: 'ខែក្នុងឆ១' },
+    {en: '', km: 'ឆមាស១' },
+    { en: 'May', km: 'ឧសភា' },
+    { en: 'June', km: 'មិថុនា' },
+    { en: 'July', km: 'ខែក្នុងឆ២' },
+    { en: 'S2', km: 'ឆមាស២' },
+    { en: 'Year', km: 'ប្រចាំឆ្នាំ' }
+  ];
 
-const SUBJECTS = [
-  "តែងសេចក្តី", "តាមអាន", "សីលធម៌", "ប្រវត្តិវិទ្យា", "ភូមិវិទ្យា",
-    "គណិតវិទ្យា", "រូបវិទ្យា", "គីមីវិទ្យា","ជីវវិទ្យា", "ផែនដីវិទ្យា",
-    "អង់គ្លេស", "គេហ", "បារាំង", "កីឡា", "បំណិន", "សុខភាព", "ចិន", "កុំព្យូទ័រ"
-];
+  function initDropdowns() {
+    const pdfMenu = document.getElementById('pdfMenu');
 
-// Converts Khmer digits (០-៩) to 0-9 and keeps only digits and one dot,
-// so scores can be typed with a Khmer keyboard.
-function normalizeScore(str) {
-    let s = String(str).replace(/[\u17E0-\u17E9]/g, ch => String(ch.charCodeAt(0) - 0x17E0));
-    s = s.replace(/[។៕]/g, '.').replace(/[^0-9.]/g, '');
-    const i = s.indexOf('.');
-    if (i !== -1) s = s.slice(0, i + 1) + s.slice(i + 1).replace(/\./g, '');
-    return s;
-}
+    SCHOOL_MONTHS.forEach(m => {
+      const pdfItem = document.createElement('button');
+      pdfItem.type = 'button';
+      pdfItem.className = 'dropdown-item';
+      pdfItem.innerHTML = `<span>${m.km}</span><span class="en-month">${m.en}</span>`;
+      pdfItem.onclick = () => handleExport('pdf', m);
+      pdfMenu.appendChild(pdfItem);
+    });
+  }
 
-let currentStudent = null;
-let scores = {};
-let listScores = {};
-let studentNames = [];
-let currentIndex = -1;
+  function toggleDropdown(menuId, event) {
+    event.stopPropagation();
+    const targetMenu = document.getElementById(menuId);
+    const isOpen = targetMenu.classList.contains('open');
 
-const monthSelect = document.getElementById('monthSelect');
-
-// --- Ripple effect for a modern tactile feel on buttons ---
-document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.btn-blue, .btn-gray');
-    if (!btn || btn.disabled) return;
-    const rect = btn.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const ripple = document.createElement('span');
-    ripple.className = 'ripple';
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-    ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-    btn.appendChild(ripple);
-    ripple.addEventListener('animationend', () => ripple.remove());
-});
-
-// --- Saving state helpers (no visual animation, just disable) ---
-function setBtnSaving(btn, isSaving) {
-    if (!btn) return;
-    btn.disabled = isSaving;
-}
-
-// Disable/enable every button and input on the page during a save operation,
-// so the user can't trigger or edit anything else mid-save.
-let lockedControls = [];
-function lockAllButtons(lock) {
-    if (lock) {
-        lockedControls = Array.from(document.querySelectorAll('button, input, select'))
-            .filter(el => !el.disabled);
-        lockedControls.forEach(el => el.disabled = true);
-    } else {
-        lockedControls.forEach(el => el.disabled = false);
-        lockedControls = [];
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+    if (!isOpen) {
+      targetMenu.classList.add('open');
     }
-}
+  }
 
-let activeSavingToast = null;
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+  });
 
-function showToast(mode, text, autoHideMs) {
+  /* ---------- Download helpers (all browsers) ---------- */
+  function base64ToBlob(b64, mime) {
+    const binary = atob(String(b64).replace(/\s/g, ''));
+    const len = binary.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
+    return new Blob([bytes], { type: mime || 'application/octet-stream' });
+  }
+
+  function saveBlob(blob, filename) {
+    // Old Edge / IE
+    if (navigator.msSaveOrOpenBlob) {
+      navigator.msSaveOrOpenBlob(blob, filename);
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.rel = 'noopener';
+    a.href = url;
+
+    if (typeof a.download === 'undefined') {
+      // very old iOS/WebViews: no download attribute -> open the file instead
+      window.location.href = url;
+    } else {
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    // keep the URL alive long enough for slow phones / big files
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }
+
+  function isInAppBrowser() {
+    return /FBAN|FBAV|FB_IAB|Instagram|Line\/|Zalo|MicroMessenger|; wv\)/i.test(navigator.userAgent);
+  }
+
+  let exporting = false;
+  let lastExport = null;
+  let userCancelled = false;
+  let activeCtrl = null;
+  let dlProgress = 0;
+  let dlTicker = null;
+  let dlAutoClose = null;
+
+  const dl = {
+    overlay: document.getElementById('dlOverlay'),
+    card: document.getElementById('dlCard'),
+    icon: document.getElementById('dlFileIcon'),
+    title: document.getElementById('dlTitle'),
+    sub: document.getElementById('dlSub'),
+    fill: document.getElementById('dlFill'),
+    pct: document.getElementById('dlPct'),
+    cancel: document.getElementById('dlCancel'),
+    retry: document.getElementById('dlRetry'),
+    close: document.getElementById('dlClose')
+  };
+
+  function dlState(state, title, sub) {
+    const type = (lastExport && lastExport.type) || 'pdf';
+    dl.card.className = 'dl-card is-' + state + ' t-' + type;
+    dl.title.textContent = title;
+    dl.sub.textContent = sub || '';
+    dl.cancel.hidden = state !== 'loading';
+    dl.retry.hidden = state !== 'error';
+    dl.close.hidden = state === 'loading';
+  }
+
+  function dlRender() {
+    const v = Math.min(100, Math.round(dlProgress));
+    dl.fill.style.width = v + '%';
+    dl.pct.textContent = v + '%';
+  }
+
+  function dlStartProgress() {
+    clearInterval(dlTicker);
+    dlProgress = 3;
+    dlRender();
+    // eases toward 92% and waits there until the server answers
+    dlTicker = setInterval(() => {
+      dlProgress += (92 - dlProgress) * 0.04;
+      dlRender();
+    }, 180);
+  }
+
+  function dlStopProgress() { clearInterval(dlTicker); dlTicker = null; }
+
+  function dlOpen(type, label, monthObj) {
+    const where = monthObj ? 'ខែ' + monthObj.km : 'ទាំងអស់';
+    clearTimeout(dlAutoClose);
+    dl.icon.className = 'dl-file fa-solid ' + (type === 'pdf' ? 'fa-file-pdf' : 'fa-file-excel');
+    dlState('loading', 'កំពុងរៀបចំឯកសារ', label + ' · ' + where);
+    dlStartProgress();
+    dl.overlay.classList.add('show');
+  }
+
+  function dlHide() {
+    clearTimeout(dlAutoClose);
+    dlStopProgress();
+    dl.overlay.classList.remove('show');
+  }
+
+  function dlSuccess(label, monthObj, inApp) {
+    dlStopProgress();
+    dlProgress = 100;
+    dlRender();
+    setTimeout(() => {
+      dlState('success', 'ទាញយកបានជោគជ័យ',
+        inApp ? 'បើមិនទាញយក សូមបើកក្នុង Chrome ឬ Safari'
+              : 'ឯកសារ ' + label + (monthObj ? ' ខែ' + monthObj.km : ' ទាំងអស់') + ' ត្រូវបានរក្សាទុក');
+      dlAutoClose = setTimeout(dlHide, inApp ? 5000 : 2200);
+    }, 350);
+  }
+
+  function dlFail(message) {
+    dlStopProgress();
+    dlState('error', 'ទាញយកមិនបាន', message);
+  }
+
+  dl.cancel.addEventListener('click', () => {
+    userCancelled = true;
+    if (activeCtrl) activeCtrl.abort();
+    dlHide();
+  });
+  dl.close.addEventListener('click', dlHide);
+  dl.retry.addEventListener('click', () => {
+    if (lastExport) handleExport(lastExport.type, lastExport.monthObj);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dl.overlay.classList.contains('show')) {
+      (dl.cancel.hidden ? dl.close : dl.cancel).click();
+    }
+  });
+
+  async function handleExport(type, monthObj) {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+    if (exporting) return;
+    exporting = true;
+    userCancelled = false;
+    lastExport = { type, monthObj };
+
+    const label = type === 'pdf' ? 'PDF' : 'Excel';
+    dlOpen(type, label, monthObj);
+
+    // Khmer sheet name in `month`, English as a fallback in `monthEn`
+    // no monthObj = download the whole spreadsheet
+    const exportURL = scriptURL +
+      '?action=export&format=' + encodeURIComponent(type) +
+      (monthObj
+        ? '&month=' + encodeURIComponent(monthObj.km) + '&monthEn=' + encodeURIComponent(monthObj.en)
+        : '&scope=all') +
+      '&_=' + Date.now();
+
+    const ctrl = ('AbortController' in window) ? new AbortController() : null;
+    activeCtrl = ctrl;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 120000) : null;
+
+    try {
+      const res = await fetch(exportURL, { redirect: 'follow', cache: 'no-store', signal: ctrl ? ctrl.signal : undefined });
+      const text = await res.text();
+
+      let file;
+      try { file = JSON.parse(text); }
+      catch (_) {
+        // Google returned an HTML page (not deployed / not authorised)
+        dlFail('Script មិនទាន់ Deploy ថ្មី ឬមិនទាន់អនុញ្ញាត');
+        return;
+      }
+
+      if (!file || !file.data) {
+        dlFail((file && file.error) || 'ទាញយកមិនបាន');
+        return;
+      }
+
+      const blob = base64ToBlob(file.data, file.mimeType);
+      saveBlob(blob, file.filename || ('សម្រង់អវត្តមាន' + (monthObj ? '_ខែ' + monthObj.km : '_ទាំងអស់') + (type === 'pdf' ? '.pdf' : '.xlsx')));
+      dlSuccess(label, monthObj, isInAppBrowser());
+    } catch (err) {
+      if (userCancelled) return;
+      dlFail(err && err.name === 'AbortError' ? 'ចំណាយពេលយូរពេក សូមព្យាយាមម្តងទៀត' : 'សូមពិនិត្យអ៊ីនធឺណិត ហើយព្យាយាមម្តងទៀត');
+    } finally {
+      if (timer) clearTimeout(timer);
+      activeCtrl = null;
+      exporting = false;
+    }
+  }
+
+  function showToast(message, type = 'warn') {
     const layer = document.getElementById('toastLayer');
-    if (!layer) return null;
+    const icons = {
+      warn: 'fa-solid fa-triangle-exclamation',
+      error: 'fa-solid fa-circle-exclamation',
+      success: 'fa-solid fa-circle-check'
+    };
+
+    const existing = layer.querySelector('.toast');
+    if (existing) existing.remove();
 
     const toast = document.createElement('div');
-    toast.className = `toast-popup toast-${mode}`;
-
-    let icon = '';
-    if (mode === 'saving') icon = '<span class="status-spinner"></span>';
-    else if (mode === 'success') icon = '<span class="status-check"></span>';
-    else if (mode === 'error') icon = '<span class="status-error-icon">!</span>';
-
-    toast.innerHTML = icon + `<span>${text}</span>`;
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<i class="${icons[type] || icons.warn}"></i><span>${message}</span>`;
     layer.appendChild(toast);
 
-    function remove() {
-        if (!toast.parentNode) return;
-        toast.classList.add('toast-out');
-        setTimeout(() => toast.remove(), 300);
-    }
-
-    if (autoHideMs) setTimeout(remove, autoHideMs);
-
-    return { el: toast, remove };
-}
-
-// Kept for compatibility with call sites: routes status updates to the popup toast.
-function setStatusAnimated(el, mode, text) {
-    if (activeSavingToast) {
-        activeSavingToast.remove();
-        activeSavingToast = null;
-    }
-    if (mode === 'saving') {
-        activeSavingToast = showToast('saving', text);
-    } else {
-        showToast(mode === 'error' ? 'error' : 'success', text, 1800);
-    }
-}
-
-function clearStatusAnimated() {
-    // No-op: popup toasts auto-dismiss themselves.
-}
-
-// Replays entrance animation on a panel by toggling its class after a reflow.
-function replayPanelAnimation(el) {
-    if (!el) return;
-    el.classList.remove('fade-swap');
-    void el.offsetWidth;
-    el.classList.add('fade-swap');
-}
-
-function showScorePanel() {
-    const scorePanel = document.getElementById('scorePanel');
-    scorePanel.style.display = 'flex';
-    replayPanelAnimation(scorePanel);
-    document.getElementById('studentPanel').classList.add('mobile-hide');
-    document.querySelector('header').classList.add('mobile-hide');
-}
-
-function hideScorePanel() {
-    document.getElementById('scorePanel').style.display = 'none';
-    const studentPanel = document.getElementById('studentPanel');
-    studentPanel.classList.remove('mobile-hide');
-    document.querySelector('header').classList.remove('mobile-hide');
-    replayPanelAnimation(studentPanel);
-}
-
-document.getElementById('backBtn').onclick = hideScorePanel;
-
-function loadStudents() {
-    const reloadBtn = document.getElementById('reloadBtn');
-    const studentListEl = document.getElementById('studentList');
-
-    if (!monthSelect.value) {
-        studentListEl.innerHTML = '<div style="padding:10px; color:red; font-size: 1rem">សូមជ្រើសរើសខែជាមុនសិន!</div>';
-        return;
-    }
-
-    reloadBtn.disabled = true;
-    reloadBtn.textContent = 'Loading';
-    studentListEl.innerHTML = `
-        <div class="score-loading">
-            <span class="status-spinner"></span>
-            <span>កំពុងទាញឈ្មោះសិស្ស! សូមរង់ចាំ...</span>
-        </div>
-    `;
-
-    studentNames = [];
-    currentIndex = -1;
-
-    fetch(`${SHEET_API_BASE}?action=getStudents&month=${monthSelect.value}`)
-        .then(res => res.json())
-        .then(data => {
-            studentNames = data;
-            studentListEl.innerHTML = '';
-
-            data.forEach((name, index) => {
-                let div = document.createElement('div');
-                div.className = 'student-item';
-                div.style.animationDelay = `${Math.min(index * 30, 600)}ms`;
-                div.innerHTML = `
-                    <i class="fa-solid fa-clipboard-user student-icon"></i>
-                    <span>${name}</span>
-                    <input type="text" inputmode="decimal" autocomplete="off" class="student-score" placeholder="ពិន្ទុ" style="width:60px;">
-                    <button class="btn-gray" title="ជ្រើសរើស" aria-label="ជ្រើសរើស"><i class="fa-solid fa-pen"></i></button>
-                `;
-
-                div.querySelector('button').onclick = () => {
-                    currentIndex = studentNames.indexOf(name);
-                    selectStudent(name);
-                };
-
-                div.querySelector('.student-score').oninput = e => {
-                    e.target.value = normalizeScore(e.target.value);
-                    listScores[name] = e.target.value;
-                };
-
-                // Enter moves the cursor to the next visible score box
-                div.querySelector('.student-score').onkeydown = e => {
-                    if (e.key !== 'Enter') return;
-                    e.preventDefault();
-                    let next = div.nextElementSibling;
-                    while (next && (next.style.display === 'none' || !next.querySelector('.student-score'))) {
-                        next = next.nextElementSibling;
-                    }
-                    if (next) {
-                        const input = next.querySelector('.student-score');
-                        input.focus();
-                        input.select();
-                        next.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-                    }
-                };
-
-                studentListEl.appendChild(div);
-            });
-        })
-        .catch(err => {
-            console.error(err);
-            studentListEl.innerHTML = '<div style="padding:10px; color:red;"> សូមជ្រើសរើសខែ !</div>';
-        })
-        .finally(() => {
-            reloadBtn.disabled = false;
-            reloadBtn.textContent = 'ពិន្ទុ 8G';
-        });
-}
-
-document.getElementById('prevStudent').onclick = () => {
-    if (!studentNames.length) return;
-    currentIndex = currentIndex > 0 ? currentIndex - 1 : studentNames.length - 1;
-    selectStudent(studentNames[currentIndex]);
-};
-
-document.getElementById('nextStudent').onclick = () => {
-    if (!studentNames.length) return;
-    currentIndex = currentIndex < studentNames.length - 1 ? currentIndex + 1 : 0;
-    selectStudent(studentNames[currentIndex]);
-};
-
-async function saveListScoresMerged() {
-    const listBtn = document.getElementById('saveListScores');
-
-    if (listBtn.disabled) return;
-
-    const selectedSubject = document.getElementById('subjectQuick').value;
-    if (!selectedSubject) {
-        setStatusAnimated(null, 'error', '⚠ សូមជ្រើសរើសមុខវិជ្ជា!');
-        return;
-    }
-
-    lockAllButtons(true);
-    setBtnSaving(listBtn, true);
-    setStatusAnimated(null, 'saving', 'កំពុងរក្សាទុក....');
-
-    let allScores = {};
-    try {
-        let res = await fetch(`${SHEET_API_BASE}?action=getAllScores&month=${monthSelect.value}`);
-        let data = await res.json();
-        allScores = data || {};
-    } catch (err) {
-        console.error("Failed to fetch all scores", err);
-        lockAllButtons(false);
-        setBtnSaving(listBtn, false);
-        setStatusAnimated(null, 'error', '❌ មិនអាចទាញទិន្នន័យបាន!');
-        return;
-    }
-
-    let updatedScores = {};
-    document.querySelectorAll('.student-item').forEach(item => {
-        let studentName = item.querySelector('span').textContent.trim();
-        let scoreValue = item.querySelector('.student-score').value.trim();
-        if (scoreValue !== '') {
-            if (!allScores[studentName]) allScores[studentName] = {};
-            allScores[studentName][selectedSubject] = scoreValue;
-            updatedScores[studentName] = allScores[studentName];
-        }
-    });
-
-    if (Object.keys(updatedScores).length === 0) {
-        lockAllButtons(false);
-        setBtnSaving(listBtn, false);
-        setStatusAnimated(null, 'error', '⚠ មិនមានពិន្ទុសម្រាប់រក្សាទុក!');
-        return;
-    }
-
-    try {
-        await fetch(`${SHEET_API_BASE}?action=saveScoresBatch&month=${monthSelect.value}`, {
-            method: 'POST',
-            body: JSON.stringify(updatedScores)
-        });
-        setBtnSaving(listBtn, false);
-        setStatusAnimated(null, 'success', ' រក្សាទុកពិន្ទុរួចរាល់!');
-        document.querySelectorAll('.student-score').forEach(input => input.value = '');
-    } catch (err) {
-        console.error(err);
-        setBtnSaving(listBtn, false);
-        setStatusAnimated(null, 'error', '❌ ការរក្សាទុកបរាជ័យ!');
-    } finally {
-        lockAllButtons(false);
-    }
-}
-
-document.getElementById('saveListScores').onclick = saveListScoresMerged;
-
-monthSelect.onchange = () => {
-    loadStudents();
-    document.getElementById('selectedStudent').textContent = 'គ្មានឈ្មោះសិស្ស';
-    currentStudent = null;
-    scores = {};
-    renderScores();
-    if (window.innerWidth > 768) {
-        showScorePanel();
-    } else {
-        hideScorePanel();
-    }
-};
-
-function selectStudent(name) {
-    currentStudent = name;
-    document.getElementById('selectedStudenth').textContent = name;
-    document.getElementById('selectedStudent').textContent = name;
-    scores = {};
-
-    document.getElementById('quickScore').value = '';
-
-    showScorePanel();
-    showScoreLoading();
-    fetch(`${SHEET_API_BASE}?action=getScores&month=${monthSelect.value}&studentName=${encodeURIComponent(name)}`)
-        .then(res => res.json())
-        .then(data => {
-            scores = data.scores || {};
-            renderScores();
-        })
-        .catch(err => {
-            console.error(err);
-            scores = {};
-            renderScores();
-        });
-}
-
-function showScoreLoading() {
-    let grid = document.getElementById('scoresGrid');
-    grid.innerHTML = `
-        <div class="score-loading">
-            <span class="status-spinner"></span>
-            <span>កំពុងដំណើរការ...</span>
-        </div>
-    `;
-}
-
-function renderScores() {
-    let grid = document.getElementById('scoresGrid');
-    grid.innerHTML = '';
-    SUBJECTS.forEach((sub, index) => {
-        let div = document.createElement('div');
-        div.className = 'score-box';
-        div.style.animationDelay = `${Math.min(index * 25, 500)}ms`;
-        div.innerHTML = `<label>${sub}</label><input type="text" inputmode="decimal" autocomplete="off" value="${scores[sub] || ''}">`;
-        div.querySelector('input').oninput = e => {
-            e.target.value = normalizeScore(e.target.value);
-            scores[sub] = e.target.value;
-        };
-        grid.appendChild(div);
-    });
-}
-
-function saveToSheet() {
-    const btn = document.getElementById('saveBtn');
-
-    if (btn.disabled) return;
-
-    if (!currentStudent) {
-        setStatusAnimated(null, 'error', 'មិនទាន់ជ្រើសសិស្ស!');
-        return;
-    }
-
-    document.getElementById('quickScore').value = '';
-
-    lockAllButtons(true);
-    setBtnSaving(btn, true);
-    setStatusAnimated(null, 'saving', 'កំពុងរក្សាទុក....');
-
-    fetch(`${SHEET_API_BASE}?action=saveScores&month=${monthSelect.value}`, {
-        method: 'POST',
-        body: JSON.stringify({ studentName: currentStudent, scores })
-    })
-    .then(() => {
-        setBtnSaving(btn, false);
-        setStatusAnimated(null, 'success', 'រក្សាទុករួចរាល់!');
-    })
-    .catch(() => {
-        console.error('Save failed');
-        setBtnSaving(btn, false);
-        setStatusAnimated(null, 'error', 'ការរក្សាទុកបរាជ័យ!');
-    })
-    .finally(() => {
-        lockAllButtons(false);
-    });
-}
-
-document.getElementById('applyQuick').onclick = () => {
-    const saveBtnEl = document.getElementById('saveBtn');
-    if (saveBtnEl.disabled) return;
-    let sub = document.getElementById('subjectQuick').value;
-    let val = document.getElementById('quickScore').value;
-    if(!sub) return;
-    scores[sub] = val;
-    renderScores();
-    saveToSheet();
-};
-
-document.getElementById('saveBtn').onclick = saveToSheet;
-
-document.getElementById('resetBtn').onclick = () => {
-    scores = {};
-    renderScores();
-};
-
-document.getElementById('reloadBtn').onclick = loadStudents;
-
-document.getElementById('searchName').oninput = e => {
-    let term = e.target.value.toLowerCase();
-    [...document.getElementById('studentList').children].forEach(div => {
-        div.style.display = div.textContent.toLowerCase().includes(term) ? '' : 'none';
-    });
-};
-
-// Fill quick subject selector background state
-const subjectQuickSelect = document.getElementById('subjectQuick');
-let placeholderOpt = document.createElement('option');
-placeholderOpt.value = "";
-placeholderOpt.textContent = "ជ្រើសរើសមុខវិជ្ជា";
-placeholderOpt.disabled = true;
-placeholderOpt.selected = true;
-placeholderOpt.hidden = true;
-subjectQuickSelect.appendChild(placeholderOpt);
-
-SUBJECTS.forEach(sub => {
-    let opt = document.createElement('option');
-    opt.value = sub;
-    opt.textContent = sub;
-    subjectQuickSelect.appendChild(opt);
-});
-
-// Setup 3-Column UI dropdown overlays cleanly
-function setupCustomGridDropdown(selectId, buttonId, dropdownId) {
-    const realSelect = document.getElementById(selectId);
-    const toggleBtn = document.getElementById(buttonId);
-    const gridDropdown = document.getElementById(dropdownId);
-
-    gridDropdown.innerHTML = '';
-
-    Array.from(realSelect.options).forEach(option => {
-        if (option.value === "") return;
-
-        const choice = document.createElement('div');
-        choice.className = 'grid-choice';
-        choice.textContent = option.text;
-        choice.setAttribute('data-value', option.value);
-
-        if (option.selected) {
-            choice.classList.add('active');
-            toggleBtn.innerHTML = `${toggleBtn.getAttribute('data-prefix')}: ${option.text} <i class="fa fa-caret-down" style="margin-left:5px;"></i>`;
-        }
-
-        choice.onclick = (e) => {
-            e.stopPropagation();
-            realSelect.value = option.value;
-
-            gridDropdown.querySelectorAll('.grid-choice').forEach(c => c.classList.remove('active'));
-            choice.classList.add('active');
-
-            toggleBtn.innerHTML = `${toggleBtn.getAttribute('data-prefix')}: ${option.text} <i class="fa fa-caret-down" style="margin-left:5px;"></i>`;
-            gridDropdown.classList.remove('show');
-
-            realSelect.dispatchEvent(new Event('change'));
-        };
-
-        gridDropdown.appendChild(choice);
-    });
-
-    if (realSelect.value === "") {
-        toggleBtn.innerHTML = `${toggleBtn.getAttribute('data-prefix')} <i class="fa fa-caret-down" style="margin-left:5px;"></i>`;
-    }
-
-    toggleBtn.onclick = (e) => {
-        e.stopPropagation();
-        document.querySelectorAll('.grid-dropdown-content').forEach(d => {
-            if (d !== gridDropdown) d.classList.remove('show');
-        });
-        gridDropdown.classList.toggle('show');
-    };
-}
-
-setupCustomGridDropdown('monthSelect', 'monthGridBtn', 'monthGridDropdown');
-setupCustomGridDropdown('subjectQuick', 'subjectGridBtn', 'subjectGridDropdown');
-
-window.onclick = () => {
-    document.querySelectorAll('.grid-dropdown-content').forEach(d => d.classList.remove('show'));
-};
-
-loadStudents();
-renderScores();
-
-// On PC-sized screens, open the score panel automatically when the page loads
-if (window.innerWidth > 768) {
-    showScorePanel();
-}
+    requestAnimationFrame(() => toast.classList.add('show'));
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 220);
+    }, 2400);
+  }
+
+  window.onload = initDropdowns;
 </script>
 </body>
 </html>
